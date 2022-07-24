@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjpowernode.dao.StudentDao">
+
+
+    <select id="selectStudents" resultType="com.bjpowernode.domain.Student">
+        select *
+        from student
+    </select>
+
+
+</mapper>
+
+<!--
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+       约束文件
+            写的文件要符合规则
+              管理写的sql映射文件
+
+        mapper标签  写你的dao层的文件的全限定名称
+
+
+-->
