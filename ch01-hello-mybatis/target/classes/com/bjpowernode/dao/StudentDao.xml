@@ -4,6 +4,18 @@
 <mapper namespace="com.bjpowernode.dao.StudentDao">
 
 
+    <insert id="InsertStudent" >
+        insert
+            into student
+        values (
+                #{id},
+                #{name},
+                #{email},
+                #{age}
+                )
+    </insert>
+
+
     <select id="selectStudents" resultType="com.bjpowernode.domain.Student">
         select *
         from student

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjpowernode.dao.StudentDao">
+
+    <!--查询所有  pageHelper分页数据插件-->
+    <select id="selectAll" resultType="Student" >
+        select
+            id, name, email, age
+        from student
+        order by id
+    </select>
+
+    <!--sql片段-->
+    <sql id="studentSql">
+        select
+            id, name, email, age
+        from student
+    </sql>
+    
+    <!--foreach  标签 用法   二-->
+    <select id="selectForeachTwo" resultType="Student">
+        <include refid="studentSql"></include>
+        /*select
+        id, name, email, age
+        from student */
+        where id in
+        <foreach collection="list" item="stu" separator="," open="(" close=")">
+            #{stu.id}
+        </foreach>
+    </select>
+    
+    <!--froeach标签  用法 1 -->
+    <select id="selectForeachOne" resultType="Student">
+        select
+            id, name, email, age
+        from student
+
+        where id in
+        <foreach collection="list" item="myId" separator="," open="(" close=")">
+            #{myId}
+        </foreach>
+    </select>
+
+    <!--where - if  标签-->
+    <select id="selectStudentWhere" resultType="Student">
+        select
+        id, name, email, age
+        from student
+        <where>
+            <if test="name != null and name != '' ">
+                or name = #{name}
+            </if>
+            <if test="age > 0">
+                or age > #{age}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectStudentIf" resultType="Student">
+        select
+            id, name, email, age
+        from student
+        where 1 = 1
+        <if test="name != null and name != '' ">
+            or name = #{name}
+        </if>
+        <if test="age > 0">
+            or age > #{age}
+        </if>
+    </select>
+
+</mapper>
+    

@@ -3,6 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
+    <!--设置mybatis的全局行为-->
+    <settings>
+        <!--设置mybatis的输出日志-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
     <!--数据库的连接信息-->
     <environments default="development">
 

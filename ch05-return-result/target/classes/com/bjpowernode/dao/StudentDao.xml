@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjpowernode.dao.StudentDao">
+
+    <!--like模糊查询  第二种-->
+    <select id="selectLikeTwo" resultType="Student">
+        select
+            id as stuId,
+            name as stuName,
+            email as stuEmail,
+            age as stuAge
+        from student
+        where name like '%' #{name} '%'
+    </select>
+
+    <!--like模糊查询  第一种  java代码-->
+    <select id="selectLikeOne" resultType="Student">
+        select
+            id as stuId,
+            name as stuName,
+            email as stuEmail,
+            age as stuAge
+        from student
+        where name like #{name}
+    </select>
+
+    <!--改名字-->
+    <select id="selectDiffColProperty" resultType="MyStudent">
+        select
+            id as stuId,
+            name as stuName,
+            email as stuEmail,
+            age as stuAge
+        from student
+    </select>
+
+
+    <resultMap id="MyStudent" type="com.bjpowernode.domain.MyStudent">
+        <!--定义列名和java属性的关系
+                column : 字段名
+                property : java 类名的属性名
+        -->
+        <!--
+                id  定义主键列
+                 result 定义非主键列名称
+        -->
+        <id column="id" property="stuId"></id>
+        <result column="name" property="stuName"></result>
+        <result column="email" property="stuEmail"></result>
+        <result column="age" property="stuAge"></result>
+    </resultMap>
+
+    <select id="selectAllMyStudents" resultMap="MyStudent">
+        select
+            id, name, email, age
+        from student
+    </select>
+
+    <!--
+        定义一个  resultMap
+            引用 定义的  返回值类型
+
+            id 自定义类型名称
+            type : java类型那个的全限定名称
+    -->
+    <resultMap id="StudentMap" type="com.bjpowernode.domain.Student">
+        <!--定义列名和java属性的关系
+                column : 字段名
+                property : java 类名的属性名
+        -->
+        <!--
+                id  定义主键列
+                 result 定义非主键列名称
+        -->
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="email" property="email"></result>
+        <result column="age" property="age"></result>
+    </resultMap>
+
+    <select id="selectAllStudents" resultMap="StudentMap">
+        select
+            id, name, email, age
+        from student
+    </select>
+
+
+    <!--定义一个方法  返回 Map
+
+        1 列名是map的key
+        2 列值是map的value
+
+    -->
+    <select id="selectMapById" resultType="map">
+        select
+            id, name, email, age
+        from student
+        where id=#{id}
+    </select>
+
+
+    <!--sql查询过后返回一个值-->
+    <select id="countStudent" resultType="int">
+        select count(id)
+        from student
+    </select>
+
+    <!--selectStudentReturnViewStudent-->
+    <select id="selectStudentReturnViewStudent" resultType="ViewStudent">
+        select
+            id, name, email, age
+        from student
+        where id=#{sid}
+
+    </select>
+
+
+    <!--传入多个参数之   命名参数  param-->
+    <select id="selectMultiParam" resultType="Student">
+        select
+            id, name, email, age
+        from student
+        where name=#{myname}
+        or age=#{myage}
+    </select>
+
+
+    <select id="selectStudentById" resultType="com.bjpowernode.domain.Student">
+        select
+            id, name, email, age
+        from student
+        where id=#{id}
+    </select>
+
+</mapper>
+    
